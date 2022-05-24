@@ -32,10 +32,14 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int DEFAULT_UPDATE_INTERVAL = 10;
     public static final int FAST_UPDATE_INTERVAL = 5;
+    public static final int DEFAULT_UPDATE_INTERVAL_LONG = 30;
+    public static final int FAST_UPDATE_INTERVAL_LONG = 15;
     private static final int PERMISSIONS_FINE_LOCATION = 99;
 
     LocationRequest locationRequest;
+    LocationRequest locationRequestLong;
     LocationCallback locationCallBack;
+    LocationCallback locationCallBackLong;
     FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
@@ -57,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
+        //chyba nie
+        locationRequestLong = new LocationRequest();
+        locationRequestLong.setInterval(1000 * DEFAULT_UPDATE_INTERVAL_LONG);
+        locationRequestLong.setFastestInterval(1000 * FAST_UPDATE_INTERVAL_LONG);
+        locationRequestLong.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        locationRequestLong.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
         //event that is triggerd whenever the update interval is met.
         locationCallBack = new LocationCallback() {
             @Override
@@ -65,7 +76,18 @@ public class MainActivity extends AppCompatActivity {
                 //save the location
                 Location location = locationResult.getLastLocation();
                 updateUIValues(location);
-                Log.i("tag", "callback");
+                Log.i("tag", "callback (co 5 sek)");
+            }
+        };
+
+        locationCallBackLong = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                //save the location
+                Location location = locationResult.getLastLocation();
+                updateUIValues(location);
+                Log.i("tag", "callback z opoznieniem (co 15 sek)");
             }
         };
 
@@ -110,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallBack, null);
+        fusedLocationProviderClient.requestLocationUpdates(locationRequestLong, locationCallBackLong, null);
         updateGPS();
     }
 
