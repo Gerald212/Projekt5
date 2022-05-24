@@ -28,7 +28,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonStart, buttonStop;
-    private TextView textStatus, textLat, textLng, textAddress;
+    private TextView textStatus, textLat, textLng, textAddress, textInfo;
 
     public static final int DEFAULT_UPDATE_INTERVAL = 10;
     public static final int FAST_UPDATE_INTERVAL = 5;
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         textLat = (TextView)findViewById(R.id.textViewLat);
         textLng = (TextView)findViewById(R.id.textViewLng);
         textAddress = (TextView)findViewById(R.id.textViewAddress);
+        textInfo = (TextView)findViewById(R.id.textViewInfo);
 
 
         locationRequest = new LocationRequest();
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startLocationUpdates() {
         textStatus.setText("Śledzenie włączone");
+        textInfo.setText("");
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -138,9 +140,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void stopLocationUpdates() {
         textStatus.setText("Śledzenie wyłączone");
-        textLat.setText("Lat: -");
-        textLng.setText("Lng: -");
-        textAddress.setText("Adres: -");
+        textInfo.setText("Ostatnia lokalizacja:");
+        //textLat.setText("Lat: -");
+        //textLng.setText("Lng: -");
+        //textAddress.setText("Adres: -");
 
         fusedLocationProviderClient.removeLocationUpdates(locationCallBack);
     }

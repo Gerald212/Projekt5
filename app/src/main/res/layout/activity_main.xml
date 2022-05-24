@@ -18,6 +18,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/textViewInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp" />
+
+        <TextView
             android:id="@+id/textViewLat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
