@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 //save the location
                 Location location = locationResult.getLastLocation();
                 updateUIValues(location);
-                Log.i("tag", "callback (co 5 min)");
+                Log.i("tag", "callback (co 5 min) - " + location.getLatitude() + " " + location.getLongitude());
             }
         };
 
