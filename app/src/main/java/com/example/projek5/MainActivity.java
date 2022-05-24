@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         locationRequest = new LocationRequest();
         locationRequest.setInterval(1000 * DEFAULT_UPDATE_INTERVAL);
         locationRequest.setFastestInterval(1000 * FAST_UPDATE_INTERVAL);
-        //locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         //event that is triggerd whenever the update interval is met.
