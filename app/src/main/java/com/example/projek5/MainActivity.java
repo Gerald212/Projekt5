@@ -31,9 +31,11 @@ public class MainActivity extends AppCompatActivity {
     private TextView textStatus, textLat, textLng, textAddress, textInfo;
 
     public static final int DEFAULT_UPDATE_INTERVAL = 10;
-    public static final int FAST_UPDATE_INTERVAL = 5;
+    //public static final int FAST_UPDATE_INTERVAL = 5;
+    public static final int FAST_UPDATE_INTERVAL = 300;
     public static final int DEFAULT_UPDATE_INTERVAL_LONG = 30;
-    public static final int FAST_UPDATE_INTERVAL_LONG = 15;
+    //public static final int FAST_UPDATE_INTERVAL_LONG = 15;
+    public static final int FAST_UPDATE_INTERVAL_LONG = 3600;
     private static final int PERMISSIONS_FINE_LOCATION = 99;
 
     LocationRequest locationRequest;
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 //save the location
                 Location location = locationResult.getLastLocation();
                 updateUIValues(location);
-                Log.i("tag", "callback (co 5 sek)");
+                Log.i("tag", "callback (co 5 min)");
             }
         };
 
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 //save the location
                 Location location = locationResult.getLastLocation();
                 updateUIValues(location);
-                Log.i("tag", "callback z opoznieniem (co 15 sek)");
+                Log.i("tag", "callback z opoznieniem (co 1 godz)");
             }
         };
 
